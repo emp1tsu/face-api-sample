@@ -18,13 +18,13 @@ video.addEventListener("play", () => {
   const displaySize = { width: video.width, height: video.height };
   faceapi.matchDimensions(canvas, displaySize);
   setInterval(async () => {
-    const detections = await faceapi.detectAllFaces(
+    const detection = await faceapi.detectSingleFace(
       video,
       new faceapi.TinyFaceDetectorOptions()
     );
-    console.log(detections);
-    const resizedDetections = faceapi.resizeResults(detections, displaySize);
+    console.log(detection);
+    const resizedDetection = faceapi.resizeResults(detection, displaySize);
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-    faceapi.draw.drawDetections(canvas, resizedDetections);
+    faceapi.draw.drawDetections(canvas, resizedDetection);
   }, 5000);
 });
